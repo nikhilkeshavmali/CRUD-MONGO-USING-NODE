@@ -109,9 +109,7 @@ http://127.0.0.1:3000
 
 ## 📸 Screenshots
 
-```
-![Employee Form](https://github.com/user-attachments/assets/ff5524c9-b70f-47a4-8929-85cb251210ec)
-
+```![Employee Form](https://github.com/user-attachments/assets/ff5524c9-b70f-47a4-8929-85cb251210ec)
 ```
 
 ---
