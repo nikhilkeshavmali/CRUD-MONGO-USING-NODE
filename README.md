@@ -110,7 +110,7 @@ http://127.0.0.1:3000
 ## 📸 Screenshots
 
 ```
-<img width="1915" height="928" alt="image" src="https://github.com/user-attachments/assets/ff5524c9-b70f-47a4-8929-85cb251210ec" />
+![Employee Form](https://github.com/user-attachments/assets/ff5524c9-b70f-47a4-8929-85cb251210ec)
 
 ```
 
