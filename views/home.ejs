@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Registration</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+      }
+
+      .container {
+        background: white;
+        padding: 35px;
+        width: 380px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #444;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #4facfe;
+        outline: none;
+      }
+
+      .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #4facfe;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #008cff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Employee Registration</h2>
+
+      <form action="/saveform" method="POST">
+        <div class="form-group">
+          <label for="empName">Employee Name</label>
+          <input
+            type="text"
+            name="empName"
+            id="empName"
+            placeholder="Enter employee name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="empEmail">Employee Email</label>
+          <input
+            type="email"
+            name="empEmail"
+            id="empEmail"
+            placeholder="Enter employee email"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="empRole">Employee Role</label>
+          <select name="empRole" id="empRole" required>
+            <option value="">Select Role</option>
+            <option value="Developer">Developer</option>
+            <option value="Designer">Designer</option>
+            <option value="Manager">Manager</option>
+            <option value="HR">HR</option>
+          </select>
+        </div>
+
+        <div class="form-group checkbox">
+          <input
+            type="checkbox"
+            name="isEligible"
+            id="isEligible"
+            value="true"
+          />
+          <label for="isEligible">Eligible for Benefits</label>
+        </div>
+
+        <button type="submit">Register Employee</button>
+      </form>
+    </div>
+  </body>
+</html>
