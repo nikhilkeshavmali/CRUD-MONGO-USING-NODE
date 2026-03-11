@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee List</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            display: block;
+            width: 160px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background: #4facfe;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #008cff;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Employee List</h2>
+
+<table>
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Eligible</th>
+</tr>
+
+<% if (employees.length > 0) { %>
+  <% employees.forEach(function(emp){ %>
+    <tr>
+        <td><%= emp.empName %></td>
+        <td><%= emp.empEmail %></td>
+        <td><%= emp.empRole %></td>
+        <td><%= emp.isEligible ? "Yes" : "No" %></td>
+    </tr>
+  <% }) %>
+<% } else { %>
+    <tr>
+        <td colspan="4">No employees found</td>
+    </tr>
+<% } %>
+
+</table>
+
+<a href="/">Register New Employee</a>
+
+</body>
+</html>

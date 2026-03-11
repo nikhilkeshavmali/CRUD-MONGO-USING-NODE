@@ -1,141 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee Registration</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee List</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 20px;
+      background: #f0f2f5;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: white;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #4facfe;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    a {
+      display: block;
+      width: 120px;
+      margin: 20px auto;
+      padding: 10px;
+      text-align: center;
+      background: #4facfe;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    a:hover {
+      background: #008cff;
+    }
+  </style>
+</head>
+<body>
+  <h2>Employee List</h2>
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-      }
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Eligible</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (employees.length > 0) { %>
+        <% employees.forEach(emp => { %>
+          <tr>
+            <td><%= emp.empName %></td>
+            <td><%= emp.empEmail %></td>
+            <td><%= emp.empRole %></td>
+            <td><%= emp.isEligible ? "Yes" : "No" %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="4">No employees found</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
 
-      body {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #4facfe, #00f2fe);
-      }
-
-      .container {
-        background: white;
-        padding: 35px;
-        width: 380px;
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      }
-
-      h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        color: #333;
-      }
-
-      .form-group {
-        margin-bottom: 18px;
-      }
-
-      label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 500;
-        color: #444;
-      }
-
-      input,
-      select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-        transition: 0.3s;
-      }
-
-      input:focus,
-      select:focus {
-        border-color: #4facfe;
-        outline: none;
-      }
-
-      .checkbox {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      button {
-        width: 100%;
-        padding: 12px;
-        background: #4facfe;
-        border: none;
-        color: white;
-        font-size: 16px;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      button:hover {
-        background: #008cff;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <h2>Employee Registration</h2>
-
-      <form action="/saveform" method="POST">
-        <div class="form-group">
-          <label for="empName">Employee Name</label>
-          <input
-            type="text"
-            name="empName"
-            id="empName"
-            placeholder="Enter employee name"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="empEmail">Employee Email</label>
-          <input
-            type="email"
-            name="empEmail"
-            id="empEmail"
-            placeholder="Enter employee email"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="empRole">Employee Role</label>
-          <select name="empRole" id="empRole" required>
-            <option value="">Select Role</option>
-            <option value="Developer">Developer</option>
-            <option value="Designer">Designer</option>
-            <option value="Manager">Manager</option>
-            <option value="HR">HR</option>
-          </select>
-        </div>
-
-        <div class="form-group checkbox">
-          <input
-            type="checkbox"
-            name="isEligible"
-            id="isEligible"
-            value="true"
-          />
-          <label for="isEligible">Eligible for Benefits</label>
-        </div>
-
-        <button type="submit">Register Employee</button>
-      </form>
-    </div>
-  </body>
+  <a href="/">Register New Employee</a>
+</body>
 </html>
