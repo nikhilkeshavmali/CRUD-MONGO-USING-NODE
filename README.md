@@ -7,22 +7,22 @@ This project demonstrates how to create and manage employee data using a web for
 
 ## 📌 Features
 
-* ✅ Employee Registration Form
-* ✅ Save Employee Data to MongoDB
-* ✅ Express.js Backend Server
-* ✅ Mongoose Schema & Model
-* ✅ Form Data Handling with POST Request
-* ✅ Simple and Clean UI using HTML & CSS
+- ✅ Employee Registration Form
+- ✅ Save Employee Data to MongoDB
+- ✅ Express.js Backend Server
+- ✅ Mongoose Schema & Model
+- ✅ Form Data Handling with POST Request
+- ✅ Simple and Clean UI using HTML & CSS
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB
-* **ODM:** Mongoose
-* **Template Engine:** EJS
-* **Frontend:** HTML, CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **ODM:** Mongoose
+- **Template Engine:** EJS
+- **Frontend:** HTML, CSS
 
 ---
 
@@ -117,12 +117,12 @@ http://127.0.0.1:3000
 
 ## 🎯 Future Improvements
 
-* 🔹 Employee List Page
-* 🔹 Update Employee
-* 🔹 Delete Employee
-* 🔹 Complete CRUD Operations
-* 🔹 MVC Folder Structure
-* 🔹 REST API Integration
+- 🔹 Employee List Page
+- 🔹 Update Employee
+- 🔹 Delete Employee
+- 🔹 Complete CRUD Operations
+- 🔹 MVC Folder Structure
+- 🔹 REST API Integration
 
 ---
 
@@ -130,9 +130,10 @@ http://127.0.0.1:3000
 
 **Nikhil Mali**
 
-* GitHub: https://github.com/nikhilkeshavmali
-* Aspiring **Full Stack Developer**
-* nikhilmali27103@gmail.com
+- GitHub: https://github.com/nikhilkeshavmali
+- Aspiring **Full Stack Developer**
+- nikhilmali27103@gmail.com
+  nikhil mali
 
 ---
 
