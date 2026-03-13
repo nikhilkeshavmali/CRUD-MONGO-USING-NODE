@@ -32,6 +32,39 @@ app.post("/saveform", async (req, res) => {
   res.redirect("/employees");
 });
 
+//delete employee
+app.get("/delete/:id", async (req, res) => {
+  try {
+    const empId = req.params.id;
+
+    await empModel.findByIdAndDelete(empId);
+
+    res.redirect("/employees");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//update employee/edit employee
+app.get("/edit/:id", async (req, res) => {
+  const empId = req.params.id;
+
+  const employee = await empModel.findById(empId);
+
+  res.render("edit", { employee });
+});
+
+//this route will handle the update form submission
+app.post("/update/:id", async (req, res) => {
+  const empId = req.params.id;
+
+  req.body.isEligible = req.body.isEligible === "true";
+
+  await empModel.findByIdAndUpdate(empId, req.body);
+
+  res.redirect("/employees");
+});
+
 // employee list
 app.get("/employees", async (req, res) => {
   const employees = await empModel.find();
