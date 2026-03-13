@@ -1,114 +1,495 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Register Employee</title>
+<head>
+<title>Employee List</title>
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-      }
+<style>
 
-      body {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        padding: 40px;
-        text-align: center;
-        min-height: 100vh;
-      }
+/* ===============================
+   GLOBAL RESET
+   Removes default browser margin/padding
+================================ */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, Helvetica, sans-serif;
+}
 
-      h2 {
-        color: white;
-        margin-bottom: 25px;
-      }
+/* ===============================
+   PAGE BACKGROUND
+================================ */
+body{
+background: linear-gradient(135deg,#667eea,#764ba2);
+padding:40px;
+min-height:100vh;
+}
 
-      form {
-        background: white;
-        padding: 30px;
-        width: 320px;
-        margin: auto;
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      }
+/* ===============================
+   PAGE TITLE
+================================ */
+h2{
+text-align:center;
+color:white;
+margin-bottom:25px;
+}
 
-      input {
-        width: 90%;
-        padding: 10px;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-        transition: 0.3s;
-      }
+/* ===============================
+   TABLE DESIGN
+================================ */
+table{
+width:85%;
+margin:auto;
+border-collapse:collapse;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
 
-      input:focus {
-        border-color: #667eea;
-        outline: none;
-        box-shadow: 0 0 5px rgba(102, 126, 234, 0.4);
-      }
+/* Table cells styling */
+th,td{
+padding:14px;
+border-bottom:1px solid #eee;
+text-align:center;
+}
 
-      label {
-        font-weight: bold;
-        color: #444;
-      }
+/* Table header styling */
+th{
+background:#2c3e50;
+color:white;
+}
 
-      button {
-        padding: 10px 20px;
-        background: linear-gradient(to right, #00c6ff, #0072ff);
-        border: none;
-        color: white;
-        cursor: pointer;
-        border-radius: 6px;
-        font-size: 15px;
-        transition: 0.3s;
-      }
+/* Hover effect on rows */
+tr:hover{
+background:#f5f7fa;
+}
 
-      button:hover {
-        transform: scale(1.05);
-      }
+/* ===============================
+   ACTION BUTTON BASE STYLE
+================================ */
+.action-btn{
+padding:6px 12px;
+border-radius:4px;
+font-size:14px;
+text-decoration:none;
+color:white;
+margin:2px;
+display:inline-block;
+}
 
-      a {
-        display: block;
-        width: 220px;
-        margin: 25px auto;
-        padding: 12px;
-        text-align: center;
-        background: #2c3e50;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-      }
+/* Edit button styling */
+.edit-btn{
+background:#28a745;
+}
 
-      a:hover {
-        background: #1a252f;
-        transform: scale(1.05);
-      }
-    </style>
-  </head>
+/* Delete button styling */
+.delete-btn{
+background:#dc3545;
+}
 
-  <body>
-    <h2>Register Employee</h2>
+/* Button hover effect */
+.action-btn:hover{
+opacity:0.85;
+}
 
-    <form action="/saveform" method="POST">
-      <input type="text" name="empName" placeholder="Enter Name" required />
+/* ===============================
+   ADD NEW EMPLOYEE BUTTON
+================================ */
+.add-btn{
+display:block;
+width:220px;
+margin:30px auto;
+padding:12px;
+text-align:center;
+background:linear-gradient(to right,#00c6ff,#0072ff);
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+transition:0.3s;
+}
 
-      <input type="email" name="empEmail" placeholder="Enter Email" required />
+/* Hover animation */
+.add-btn:hover{
+transform:scale(1.05);
+}
 
-      <input type="text" name="empRole" placeholder="Enter Role" required />
+</style>
 
-      <br />
+</head>
 
-      <label>Eligible</label>
-      <input type="checkbox" name="isEligible" value="true" />
+<body>
 
-      <br /><br />
+<h2>Employee List</h2>
 
-      <button type="submit">Save Employee</button>
-    </form>
+<table>
 
-    <a href="/employees">View Employee List</a>
-  </body>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Eligible</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+<!-- =====================================================
+CHECK IF EMPLOYEE DATA EXISTS
+
+employees variable comes from the backend:
+
+app.get("/employees", async (req,res)=>{
+   const employees = await empModel.find();
+   res.render("employees",{employees});
+})
+
+If employees array has records → display them
+If empty → show "No employees found"
+===================================================== -->
+
+<% if (employees.length > 0) { %>
+
+<!-- =====================================================
+LOOP THROUGH EACH EMPLOYEE OBJECT
+
+forEach loop dynamically creates rows
+for every employee stored in MongoDB
+===================================================== -->
+
+<% employees.forEach(emp => { %>
+
+<tr>
+
+<!-- Display employee name -->
+<td><%= emp.empName %></td>
+
+<!-- Display employee email -->
+<td><%= emp.empEmail %></td>
+
+<!-- Display employee role -->
+<td><%= emp.empRole %></td>
+
+<!-- =====================================================
+BOOLEAN CHECK
+
+If isEligible = true → show "Yes"
+If isEligible = false → show "No"
+===================================================== -->
+
+<td><%= emp.isEligible ? "Yes" : "No" %></td>
+
+<td>
+
+<!-- =====================================================
+EDIT BUTTON
+
+When clicked → opens edit page
+
+Route in backend:
+GET /edit/:id
+
+Example URL:
+http://localhost:3000/edit/685abc123
+===================================================== -->
+
+<a href="/edit/<%= emp._id %>" class="action-btn edit-btn">Edit</a>
+
+<!-- =====================================================
+DELETE BUTTON
+
+When clicked → deletes employee
+
+Route in backend:
+GET /delete/:id
+
+Example URL:
+http://localhost:3000/delete/685abc123
+===================================================== -->
+
+<a href="/delete/<%= emp._id %>" class="action-btn delete-btn">Delete</a>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+<!-- =====================================================
+IF DATABASE HAS NO EMPLOYEES
+===================================================== -->
+
+<% } else { %>
+
+<tr>
+<td colspan="5">No employees found</td>
+</tr>
+
+<% } %>
+
+</tbody>
+
+</table>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Employee List</title>
+
+<style>
+
+/* ===============================
+   GLOBAL RESET
+   Removes default browser margin/padding
+================================ */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===============================
+   PAGE BACKGROUND
+================================ */
+body{
+background: linear-gradient(135deg,#667eea,#764ba2);
+padding:40px;
+min-height:100vh;
+}
+
+/* ===============================
+   PAGE TITLE
+================================ */
+h2{
+text-align:center;
+color:white;
+margin-bottom:25px;
+}
+
+/* ===============================
+   TABLE DESIGN
+================================ */
+table{
+width:85%;
+margin:auto;
+border-collapse:collapse;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Table cells styling */
+th,td{
+padding:14px;
+border-bottom:1px solid #eee;
+text-align:center;
+}
+
+/* Table header styling */
+th{
+background:#2c3e50;
+color:white;
+}
+
+/* Hover effect on rows */
+tr:hover{
+background:#f5f7fa;
+}
+
+/* ===============================
+   ACTION BUTTON BASE STYLE
+================================ */
+.action-btn{
+padding:6px 12px;
+border-radius:4px;
+font-size:14px;
+text-decoration:none;
+color:white;
+margin:2px;
+display:inline-block;
+}
+
+/* Edit button styling */
+.edit-btn{
+background:#28a745;
+}
+
+/* Delete button styling */
+.delete-btn{
+background:#dc3545;
+}
+
+/* Button hover effect */
+.action-btn:hover{
+opacity:0.85;
+}
+
+/* ===============================
+   ADD NEW EMPLOYEE BUTTON
+================================ */
+.add-btn{
+display:block;
+width:220px;
+margin:30px auto;
+padding:12px;
+text-align:center;
+background:linear-gradient(to right,#00c6ff,#0072ff);
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+/* Hover animation */
+.add-btn:hover{
+transform:scale(1.05);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Employee List</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Eligible</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+<!-- =====================================================
+CHECK IF EMPLOYEE DATA EXISTS
+
+employees variable comes from the backend:
+
+app.get("/employees", async (req,res)=>{
+   const employees = await empModel.find();
+   res.render("employees",{employees});
+})
+
+If employees array has records → display them
+If empty → show "No employees found"
+===================================================== -->
+
+<% if (employees.length > 0) { %>
+
+<!-- =====================================================
+LOOP THROUGH EACH EMPLOYEE OBJECT
+
+forEach loop dynamically creates rows
+for every employee stored in MongoDB
+===================================================== -->
+
+<% employees.forEach(emp => { %>
+
+<tr>
+
+<!-- Display employee name -->
+<td><%= emp.empName %></td>
+
+<!-- Display employee email -->
+<td><%= emp.empEmail %></td>
+
+<!-- Display employee role -->
+<td><%= emp.empRole %></td>
+
+<!-- =====================================================
+BOOLEAN CHECK
+
+If isEligible = true → show "Yes"
+If isEligible = false → show "No"
+===================================================== -->
+
+<td><%= emp.isEligible ? "Yes" : "No" %></td>
+
+<td>
+
+<!-- =====================================================
+EDIT BUTTON
+
+When clicked → opens edit page
+
+Route in backend:
+GET /edit/:id
+
+Example URL:
+http://localhost:3000/edit/685abc123
+===================================================== -->
+
+<a href="/edit/<%= emp._id %>" class="action-btn edit-btn">Edit</a>
+
+<!-- =====================================================
+DELETE BUTTON
+
+When clicked → deletes employee
+
+Route in backend:
+GET /delete/:id
+
+Example URL:
+http://localhost:3000/delete/685abc123
+===================================================== -->
+
+<a href="/delete/<%= emp._id %>" class="action-btn delete-btn">Delete</a>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+<!-- =====================================================
+IF DATABASE HAS NO EMPLOYEES
+===================================================== -->
+
+<% } else { %>
+
+<tr>
+<td colspan="5">No employees found</td>
+</tr>
+
+<% } %>
+
+</tbody>
+
+</table>
+
+<!-- =====================================================
+BUTTON TO ADD NEW EMPLOYEE
+
+Redirects user to the home page
+where the employee registration form exists
+===================================================== -->
+
+<a href="/" class="add-btn">Add New Employee</a>
+
+</body>
+</html>
+<!-- =====================================================
+BUTTON TO ADD NEW EMPLOYEE
+
+Redirects user to the home page
+where the employee registration form exists
+===================================================== -->
+
+<a href="/" class="add-btn">Add New Employee</a>
+
+</body>
 </html>
