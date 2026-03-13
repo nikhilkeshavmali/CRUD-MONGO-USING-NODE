@@ -1,85 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee List</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      padding: 20px;
-      background: #f0f2f5;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    table {
-      width: 80%;
-      margin: 0 auto;
-      border-collapse: collapse;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      background: white;
-    }
-    th, td {
-      padding: 12px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background-color: #4facfe;
-      color: white;
-    }
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-    a {
-      display: block;
-      width: 120px;
-      margin: 20px auto;
-      padding: 10px;
-      text-align: center;
-      background: #4facfe;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-    a:hover {
-      background: #008cff;
-    }
-  </style>
-</head>
-<body>
-  <h2>Employee List</h2>
+<html>
+  <head>
+    <title>Register Employee</title>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Eligible</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if (employees.length > 0) { %>
-        <% employees.forEach(emp => { %>
-          <tr>
-            <td><%= emp.empName %></td>
-            <td><%= emp.empEmail %></td>
-            <td><%= emp.empRole %></td>
-            <td><%= emp.isEligible ? "Yes" : "No" %></td>
-          </tr>
-        <% }) %>
-      <% } else { %>
-        <tr>
-          <td colspan="4">No employees found</td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
+    <style>
+      body {
+        font-family: Arial;
+        background: #f4f4f4;
+        padding: 40px;
+        text-align: center;
+      }
 
-  <a href="/">Register New Employee</a>
-</body>
+      form {
+        background: white;
+        padding: 20px;
+        width: 300px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        width: 90%;
+        padding: 10px;
+        margin: 8px 0;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: #4facfe;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background: #008cff;
+      }
+
+      a {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 10px;
+        text-align: center;
+        background: #2c3e50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+      }
+
+      a:hover {
+        background: #1a252f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Register Employee</h2>
+
+    <form action="/saveform" method="POST">
+      <input type="text" name="empName" placeholder="Enter Name" required />
+
+      <input type="email" name="empEmail" placeholder="Enter Email" required />
+
+      <input type="text" name="empRole" placeholder="Enter Role" required />
+
+      <br />
+
+      <label>Eligible</label>
+      <input type="checkbox" name="isEligible" value="true" />
+
+      <br /><br />
+
+      <button type="submit">Save Employee</button>
+    </form>
+
+    <a href="/employees">View Employee List</a>
+  </body>
 </html>
